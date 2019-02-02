@@ -93,8 +93,8 @@ public class Sort {
     }
 
     private static void siftDown(int[] array, int root, int end) {
-        // Continually swap the root with the greatest child
-        // until theres's no more children or the root is greater than the children
+        // Continually swap the root with the greatest child until there's no
+        // more children or the root is greater than the children
         while (2 * root + 1 <= end) {
             int swap = root;
             int child = 2 * root + 1; // left child
@@ -176,30 +176,31 @@ public class Sort {
         quickSort(array, 0, array.length - 1);
     }
 
-    private static void quickSort(int[] array, int lowerIndex, int higherIndex) {
-        if (lowerIndex < higherIndex) {
-            int pivotIndex = partition(array, lowerIndex, higherIndex);
+    private static void quickSort(int[] array, int lower, int higher) {
+        if (lower < higher) {
+            int pivotIndex = partition(array, lower, higher);
 
-            quickSort(array, lowerIndex, pivotIndex - 1);
-            quickSort(array, pivotIndex + 1, higherIndex);
+            quickSort(array, lower, pivotIndex - 1);
+            quickSort(array, pivotIndex + 1, higher);
         }
     }
 
-    private static int partition(int[] array, int lowerIndex, int higherIndex) {
+    private static int partition(int[] array, int lower, int higher) {
         // Pick a pivot between lower index and higher index
-        int pivotIndex = (int) (Math.random() * (higherIndex - lowerIndex)) + lowerIndex;
+        int pivotIndex = (int)(Math.random() * (higher - lower))
+                + lower;
 
         // Place pivot at the end of the subarray
         int temp = array[pivotIndex];
-        array[pivotIndex] = array[higherIndex];
-        array[higherIndex] = temp;
+        array[pivotIndex] = array[higher];
+        array[higher] = temp;
 
-        pivotIndex = higherIndex;
+        pivotIndex = higher;
         int pivot = array[pivotIndex];
 
         // Partitioning
-        int i = lowerIndex;
-        for (int j = lowerIndex; j < higherIndex; j++) {
+        int i = lower;
+        for (int j = lower; j < higher; j++) {
             if (array[j] <= pivot) {
                 temp = array[i];
                 array[i] = array[j];
@@ -222,26 +223,27 @@ public class Sort {
         quickSort3(array, 0, array.length - 1);
     }
 
-    public static void quickSort3(int[] array, int lowerIndex, int higherIndex) {
-        if (lowerIndex < higherIndex) {
+    public static void quickSort3(int[] array, int lower, int higher) {
+        if (lower < higher) {
             // Pick a pivot between lower index and higher index
-            int pivotIndex = (int) (Math.random() * (higherIndex - lowerIndex)) + lowerIndex;
+            int pivotIndex = (int)(Math.random() * (higher - lower))
+                    + lower;
 
             // Place pivot at the start of the (sub)array
             int temp = array[pivotIndex];
-            array[pivotIndex] = array[lowerIndex];
-            array[lowerIndex] = temp;
+            array[pivotIndex] = array[lower];
+            array[lower] = temp;
 
-            pivotIndex = lowerIndex;
+            pivotIndex = lower;
             int pivot = array[pivotIndex];
 
             // The upper index of the "less than pivot" partition
-            int lt = lowerIndex;
+            int lt = lower;
             // The lower index of the "greater than pivot" partition
-            int gt = higherIndex;
+            int gt = higher;
 
             // Partitioning
-            int i = lowerIndex + 1;
+            int i = lower + 1;
             while (i <= gt) {
                 if (array[i] < pivot) {
                     temp = array[lt];
@@ -264,8 +266,8 @@ public class Sort {
             }
 
             // Recursively call on the left and right partitions
-            quickSort3(array, lowerIndex, lt - 1);
-            quickSort3(array, gt + 1, higherIndex);
+            quickSort3(array, lower, lt - 1);
+            quickSort3(array, gt + 1, higher);
         }
     }
 
@@ -296,7 +298,8 @@ public class Sort {
         bubbleSort(array);
         endTime = System.nanoTime();
         System.out.println("Bubble Sort:");
-        System.out.println("(" + isSorted(array) + "): " + (endTime - startTime) / 1000000000.0);
+        System.out.println("(" + isSorted(array) + "): "
+                + (endTime - startTime) / 1000000000.0);
 
         // Selection Sort
         randomArray(array, n);
@@ -304,7 +307,8 @@ public class Sort {
         selectionSort(array);
         endTime = System.nanoTime();
         System.out.println("\nSelection Sort:");
-        System.out.println("(" + isSorted(array) + "): " + (endTime - startTime) / 1000000000.0);
+        System.out.println("(" + isSorted(array) + "): "
+                + (endTime - startTime) / 1000000000.0);
 
         // Insertion Sort
         randomArray(array, n);
@@ -312,7 +316,8 @@ public class Sort {
         insertionSort(array);
         endTime = System.nanoTime();
         System.out.println("\nInsertion Sort:");
-        System.out.println("(" + isSorted(array) + "): " + (endTime - startTime) / 1000000000.0);
+        System.out.println("(" + isSorted(array) + "): "
+                + (endTime - startTime) / 1000000000.0);
 
         // Heap Sort
         randomArray(array, n);
@@ -320,7 +325,8 @@ public class Sort {
         heapSort(array);
         endTime = System.nanoTime();
         System.out.println("\nHeap Sort:");
-        System.out.println("(" + isSorted(array) + "): " + (endTime - startTime) / 1000000000.0);
+        System.out.println("(" + isSorted(array) + "): "
+                + (endTime - startTime) / 1000000000.0);
 
         // Merge Sort
         randomArray(array, n);
@@ -328,7 +334,8 @@ public class Sort {
         mergeSort(array);
         endTime = System.nanoTime();
         System.out.println("\nMerge Sort:");
-        System.out.println("(" + isSorted(array) + "): " + (endTime - startTime) / 1000000000.0);
+        System.out.println("(" + isSorted(array) + "): "
+                + (endTime - startTime) / 1000000000.0);
 
         // Quick Sort
         randomArray(array, n);
@@ -336,7 +343,8 @@ public class Sort {
         quickSort(array);
         endTime = System.nanoTime();
         System.out.println("\nQuick Sort:");
-        System.out.println("(" + isSorted(array) + "): " + (endTime - startTime) / 1000000000.0);
+        System.out.println("(" + isSorted(array) + "): "
+                + (endTime - startTime) / 1000000000.0);
 
         // Quick Sort (3 way partition)
         randomArray(array, n);
@@ -344,7 +352,8 @@ public class Sort {
         quickSort3(array);
         endTime = System.nanoTime();
         System.out.println("\nQuick Sort (3-Way Partition):");
-        System.out.println("(" + isSorted(array) + "): " + (endTime - startTime) / 1000000000.0);
+        System.out.println("(" + isSorted(array) + "): "
+                + (endTime - startTime) / 1000000000.0);
 
         // Quick Sort (3 way partition)
         randomArray(array, n);
@@ -352,6 +361,7 @@ public class Sort {
         Arrays.sort(array);
         endTime = System.nanoTime();
         System.out.println("\nJava Arrays.sort:");
-        System.out.println("(" + isSorted(array) + "): " + (endTime - startTime) / 1000000000.0);
+        System.out.println("(" + isSorted(array) + "): "
+                + (endTime - startTime) / 1000000000.0);
     }
 }
